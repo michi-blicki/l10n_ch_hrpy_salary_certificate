@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_l10n_ch_generate_salary_certificate_wizard_form" model="ir.ui.view">
+        <field name="name">l10n.ch.salary.certificate.generate.wizard.form</field>
+        <field name="model">l10n.ch.salary.certificate.generate.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generate Salary Certificate">
+                <group>
+                    <field name="employee_id" readonly="1"/>
+                    <field name="year"/>
+                    <field name="existing_confirmed_id" readonly="1" invisible="not existing_confirmed_id"/>
+                    <field name="warning_message" readonly="1" invisible="not warning_message"/>
+                    <field name="replace_existing" invisible="not existing_confirmed_id"/>
+                </group>
+                <footer>
+                    <button name="action_generate" type="object" string="Generate" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_l10n_ch_generate_salary_certificate_wizard" model="ir.actions.act_window">
+        <field name="name">Generate Salary Certificate</field>
+        <field name="res_model">l10n.ch.salary.certificate.generate.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

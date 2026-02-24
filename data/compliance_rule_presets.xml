@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="compliance_rule_preset_ch_i_year" model="l10n.ch.salary.certificate.compliance.rule.preset">
+        <field name="sequence">10</field>
+        <field name="code">CH_I_YEAR_DECLARATION</field>
+        <field name="name">Calendar year declaration (Buchstabe D)</field>
+        <field name="chapter">chapter_i</field>
+        <field name="guidance_reference">Chapter I / D</field>
+        <field name="rule_type">calendar_year_equals</field>
+        <field name="target_field_key">D_YEAR</field>
+    </record>
+
+    <record id="compliance_rule_preset_ch_i_employer" model="l10n.ch.salary.certificate.compliance.rule.preset">
+        <field name="sequence">20</field>
+        <field name="code">CH_I_EMPLOYER_REQUIRED</field>
+        <field name="name">Employer data required (A)</field>
+        <field name="chapter">chapter_i</field>
+        <field name="guidance_reference">Chapter I / A</field>
+        <field name="rule_type">required_non_empty</field>
+        <field name="target_field_key">A_EMPLOYER</field>
+    </record>
+
+    <record id="compliance_rule_preset_ch_i_employee" model="l10n.ch.salary.certificate.compliance.rule.preset">
+        <field name="sequence">30</field>
+        <field name="code">CH_I_EMPLOYEE_REQUIRED</field>
+        <field name="name">Employee data required (B)</field>
+        <field name="chapter">chapter_i</field>
+        <field name="guidance_reference">Chapter I / B</field>
+        <field name="rule_type">required_non_empty</field>
+        <field name="target_field_key">B_EMPLOYEE</field>
+    </record>
+
+    <record id="compliance_rule_preset_ch_i_income" model="l10n.ch.salary.certificate.compliance.rule.preset">
+        <field name="sequence">40</field>
+        <field name="code">CH_I_MAIN_INCOME_NON_NEGATIVE</field>
+        <field name="name">Main income amount must be non-negative (Ziffer 1)</field>
+        <field name="chapter">chapter_i</field>
+        <field name="guidance_reference">Chapter I / Ziffer 1</field>
+        <field name="rule_type">numeric_min</field>
+        <field name="target_field_key">Z1_MAIN_INCOME</field>
+        <field name="threshold_value">0.0</field>
+    </record>
+
+    <record id="compliance_rule_preset_ch_i_replacement" model="l10n.ch.salary.certificate.compliance.rule.preset">
+        <field name="sequence">50</field>
+        <field name="code">CH_I_REPLACEMENT_REMARK_EXACT</field>
+        <field name="name">Replacement remark exact text (Ziffer 15)</field>
+        <field name="chapter">chapter_i</field>
+        <field name="guidance_reference">Chapter I / Ziffer 15</field>
+        <field name="rule_type">replacement_remark_exact</field>
+        <field name="target_field_key">Z15_REMARKS</field>
+    </record>
+
+    <record id="compliance_rule_preset_ch_ii_private_small" model="l10n.ch.salary.certificate.compliance.rule.preset">
+        <field name="sequence">110</field>
+        <field name="code">CH_II_NON_DECLARABLE_PRIVATE_SMALL</field>
+        <field name="name">Small private benefits non-declarable below threshold</field>
+        <field name="chapter">chapter_ii</field>
+        <field name="guidance_reference">Chapter II / Rz 72</field>
+        <field name="rule_type">non_declarable_threshold</field>
+        <field name="target_field_key">Z2_3_OTHER_BENEFITS_DECLARED</field>
+        <field name="reference_field_key">Z2_3_OTHER_BENEFITS_BASE</field>
+        <field name="threshold_value">500.0</field>
+    </record>
+
+    <record id="compliance_rule_preset_ch_ii_spesen_small" model="l10n.ch.salary.certificate.compliance.rule.preset">
+        <field name="sequence">120</field>
+        <field name="code">CH_II_EXPENSES_NON_DECLARABLE_SMALL</field>
+        <field name="name">Small expenses must not be declared as taxable amount</field>
+        <field name="chapter">chapter_ii</field>
+        <field name="guidance_reference">Chapter II / Rz 72</field>
+        <field name="rule_type">non_declarable_threshold</field>
+        <field name="target_field_key">Z13_EXPENSES_DECLARED</field>
+        <field name="reference_field_key">Z13_EXPENSES_BASE</field>
+        <field name="threshold_value">1000.0</field>
+    </record>
+
+    <record id="compliance_rule_preset_ch_ii_transport" model="l10n.ch.salary.certificate.compliance.rule.preset">
+        <field name="sequence">130</field>
+        <field name="code">CH_II_TRANSPORT_NON_DECLARABLE_RULE</field>
+        <field name="name">Transport benefit declaration threshold (F)</field>
+        <field name="chapter">chapter_ii</field>
+        <field name="guidance_reference">Chapter II / Rz 72</field>
+        <field name="rule_type">non_declarable_threshold</field>
+        <field name="target_field_key">F_TRANSPORT_DECLARED</field>
+        <field name="reference_field_key">F_TRANSPORT_BASE</field>
+        <field name="threshold_value">0.0</field>
+    </record>
+</odoo>

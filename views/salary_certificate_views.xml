@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_l10n_ch_salary_certificate_tree" model="ir.ui.view">
+        <field name="name">l10n.ch.salary.certificate.tree</field>
+        <field name="model">l10n.ch.salary.certificate</field>
+        <field name="arch" type="xml">
+            <list string="Salary Certificates" default_order="year desc,id desc">
+                <field name="year"/>
+                <field name="employee_id"/>
+                <field name="state"/>
+                <field name="template_id"/>
+                <field name="confirmed_at"/>
+                <field name="pdf_attachment_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_l10n_ch_salary_certificate_search" model="ir.ui.view">
+        <field name="name">l10n.ch.salary.certificate.search</field>
+        <field name="model">l10n.ch.salary.certificate</field>
+        <field name="arch" type="xml">
+            <search string="Salary Certificates">
+                <field name="employee_id"/>
+                <field name="year"/>
+                <field name="state"/>
+                <filter name="filter_confirmed" string="Confirmed" domain="[('state', '=', 'confirmed')]"/>
+                <filter name="filter_replaced" string="Replaced" domain="[('state', '=', 'replaced')]"/>
+                <filter name="filter_archived" string="Archived" domain="[('state', '=', 'archived')]"/>
+                <separator/>
+                <filter name="group_by_year" string="Year" context="{'group_by': 'year'}"/>
+                <filter name="group_by_employee" string="Employee" context="{'group_by': 'employee_id'}"/>
+                <filter name="group_by_state" string="Status" context="{'group_by': 'state'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_l10n_ch_salary_certificate_form" model="ir.ui.view">
+        <field name="name">l10n.ch.salary.certificate.form</field>
+        <field name="model">l10n.ch.salary.certificate</field>
+        <field name="arch" type="xml">
+            <form string="Salary Certificate">
+                <header>
+                    <button name="action_compute_field_values" type="object" string="Recompute Values" invisible="state != 'draft'"/>
+                    <button name="action_generate_pdf" type="object" string="Generate PDF" invisible="state != 'draft'"/>
+                    <button name="action_confirm" type="object" string="Confirm" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_download_pdf" type="object" string="Download PDF" invisible="not pdf_attachment_id"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,replaced,archived"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="employee_id"/>
+                            <field name="year"/>
+                            <field name="template_id"/>
+                            <field name="pdf_attachment_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="replacement_of_id" readonly="1"/>
+                            <field name="replaced_by_id" readonly="1"/>
+                            <field name="replaced_at" readonly="1"/>
+                            <field name="confirmed_by_id" readonly="1"/>
+                            <field name="confirmed_at" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Compliance">
+                        <field name="is_compliance_valid"/>
+                        <field name="compliance_message"/>
+                    </group>
+                    <group string="Calculated Values">
+                        <field name="field_value_snapshot" widget="json" readonly="1"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_l10n_ch_salary_certificate" model="ir.actions.act_window">
+        <field name="name">Salary Certificates</field>
+        <field name="res_model">l10n.ch.salary.certificate</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_l10n_ch_salary_certificate_search"/>
+        <field name="context">{'search_default_filter_confirmed': 1}</field>
+    </record>
+
+    <menuitem
+        id="menu_l10n_ch_salary_certificate"
+        name="Salary Certificates"
+        parent="hr.menu_hr_employee_payroll"
+        action="action_l10n_ch_salary_certificate"
+        sequence="15"
+    />
+</odoo>

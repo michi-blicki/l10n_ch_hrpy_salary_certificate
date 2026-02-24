@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_l10n_ch_salary_certificate_pdf_field_tree" model="ir.ui.view">
+        <field name="name">l10n.ch.salary.certificate.pdf.field.tree</field>
+        <field name="model">l10n.ch.salary.certificate.pdf.field</field>
+        <field name="arch" type="xml">
+            <list string="Salary Certificate PDF Fields" default_order="docversion,sequence,id">
+                <field name="sequence"/>
+                <field name="docversion"/>
+                <field name="code"/>
+                <field name="section"/>
+                <field name="label"/>
+                <field name="required_in_template"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_l10n_ch_salary_certificate_pdf_field_form" model="ir.ui.view">
+        <field name="name">l10n.ch.salary.certificate.pdf.field.form</field>
+        <field name="model">l10n.ch.salary.certificate.pdf.field</field>
+        <field name="arch" type="xml">
+            <form string="Salary Certificate PDF Field">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="sequence"/>
+                            <field name="docversion"/>
+                            <field name="code"/>
+                            <field name="section"/>
+                        </group>
+                        <group>
+                            <field name="label"/>
+                            <field name="required_in_template"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group string="Guidance">
+                        <field name="help_text"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_l10n_ch_salary_certificate_pdf_field_search" model="ir.ui.view">
+        <field name="name">l10n.ch.salary.certificate.pdf.field.search</field>
+        <field name="model">l10n.ch.salary.certificate.pdf.field</field>
+        <field name="arch" type="xml">
+            <search string="Salary Certificate PDF Fields">
+                <field name="docversion"/>
+                <field name="code"/>
+                <field name="section"/>
+                <field name="label"/>
+                <filter name="filter_required" string="Required" domain="[('required_in_template', '=', True)]"/>
+                <filter name="filter_optional" string="Optional" domain="[('required_in_template', '=', False)]"/>
+                <filter name="filter_active" string="Active" domain="[('active', '=', True)]"/>
+                <separator/>
+                <filter name="group_by_docversion" string="Docversion" context="{'group_by': 'docversion'}"/>
+                <filter name="group_by_section" string="Section" context="{'group_by': 'section'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_l10n_ch_salary_certificate_pdf_field" model="ir.actions.act_window">
+        <field name="name">PDF Fields</field>
+        <field name="res_model">l10n.ch.salary.certificate.pdf.field</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_l10n_ch_salary_certificate_pdf_field_search"/>
+        <field name="context">{'search_default_filter_active': 1}</field>
+    </record>
+
+    <record id="view_l10n_ch_salary_certificate_formula_tree" model="ir.ui.view">
+        <field name="name">l10n.ch.salary.certificate.formula.tree</field>
+        <field name="model">l10n.ch.salary.certificate.formula</field>
+        <field name="arch" type="xml">
+            <list string="Salary Certificate Formulas" default_order="sequence,id">
+                <field name="sequence"/>
+                <field name="template_id"/>
+                <field name="pdf_field_id"/>
+                <field name="formula_kind"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_l10n_ch_salary_certificate_formula_form" model="ir.ui.view">
+        <field name="name">l10n.ch.salary.certificate.formula.form</field>
+        <field name="model">l10n.ch.salary.certificate.formula</field>
+        <field name="arch" type="xml">
+            <form string="Salary Certificate Formula">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="sequence"/>
+                            <field name="template_id"/>
+                            <field name="pdf_field_id"/>
+                            <field name="pdf_field_key" readonly="1"/>
+                            <field name="label" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="formula_kind"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group string="Formula">
+                        <field name="formula" widget="text"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_l10n_ch_salary_certificate_formula_search" model="ir.ui.view">
+        <field name="name">l10n.ch.salary.certificate.formula.search</field>
+        <field name="model">l10n.ch.salary.certificate.formula</field>
+        <field name="arch" type="xml">
+            <search string="Salary Certificate Formulas">
+                <field name="template_id"/>
+                <field name="pdf_field_id"/>
+                <field name="formula_kind"/>
+                <filter name="filter_active" string="Active" domain="[('active', '=', True)]"/>
+                <filter name="filter_inactive" string="Inactive" domain="[('active', '=', False)]"/>
+                <separator/>
+                <filter name="group_by_template" string="Template" context="{'group_by': 'template_id'}"/>
+                <filter name="group_by_kind" string="Formula Kind" context="{'group_by': 'formula_kind'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_l10n_ch_salary_certificate_formula" model="ir.actions.act_window">
+        <field name="name">Formulas</field>
+        <field name="res_model">l10n.ch.salary.certificate.formula</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_l10n_ch_salary_certificate_formula_search"/>
+        <field name="context">{'search_default_filter_active': 1}</field>
+    </record>
+
+    <record id="view_l10n_ch_salary_certificate_compliance_rule_tree" model="ir.ui.view">
+        <field name="name">l10n.ch.salary.certificate.compliance.rule.tree</field>
+        <field name="model">l10n.ch.salary.certificate.compliance.rule</field>
+        <field name="arch" type="xml">
+            <list string="Compliance Rules" default_order="sequence,id">
+                <field name="sequence"/>
+                <field name="active"/>
+                <field name="template_id"/>
+                <field name="code"/>
+                <field name="chapter"/>
+                <field name="rule_type"/>
+                <field name="target_field_key"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_l10n_ch_salary_certificate_compliance_rule_form" model="ir.ui.view">
+        <field name="name">l10n.ch.salary.certificate.compliance.rule.form</field>
+        <field name="model">l10n.ch.salary.certificate.compliance.rule</field>
+        <field name="arch" type="xml">
+            <form string="Compliance Rule">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="sequence"/>
+                            <field name="active"/>
+                            <field name="template_id"/>
+                            <field name="code"/>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="chapter"/>
+                            <field name="guidance_reference"/>
+                            <field name="rule_type"/>
+                            <field name="target_field_key"/>
+                            <field name="reference_field_key"/>
+                            <field name="threshold_value"/>
+                            <field name="expected_value"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_l10n_ch_salary_certificate_compliance_rule_search" model="ir.ui.view">
+        <field name="name">l10n.ch.salary.certificate.compliance.rule.search</field>
+        <field name="model">l10n.ch.salary.certificate.compliance.rule</field>
+        <field name="arch" type="xml">
+            <search string="Compliance Rules">
+                <field name="template_id"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="chapter"/>
+                <field name="rule_type"/>
+                <filter name="filter_chapter_i" string="Chapter I" domain="[('chapter', '=', 'chapter_i')]"/>
+                <filter name="filter_chapter_ii" string="Chapter II" domain="[('chapter', '=', 'chapter_ii')]"/>
+                <filter name="filter_active" string="Active" domain="[('active', '=', True)]"/>
+                <separator/>
+                <filter name="group_by_template" string="Template" context="{'group_by': 'template_id'}"/>
+                <filter name="group_by_chapter" string="Chapter" context="{'group_by': 'chapter'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_l10n_ch_salary_certificate_compliance_rule" model="ir.actions.act_window">
+        <field name="name">Compliance Rules</field>
+        <field name="res_model">l10n.ch.salary.certificate.compliance.rule</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_l10n_ch_salary_certificate_compliance_rule_search"/>
+        <field name="context">{'search_default_filter_active': 1}</field>
+    </record>
+
+    <record id="view_l10n_ch_salary_certificate_compliance_preset_tree" model="ir.ui.view">
+        <field name="name">l10n.ch.salary.certificate.compliance.rule.preset.tree</field>
+        <field name="model">l10n.ch.salary.certificate.compliance.rule.preset</field>
+        <field name="arch" type="xml">
+            <list string="Compliance Rule Presets" default_order="sequence,id">
+                <field name="sequence"/>
+                <field name="active"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="chapter"/>
+                <field name="guidance_reference"/>
+                <field name="rule_type"/>
+                <field name="target_field_key"/>
+                <field name="reference_field_key"/>
+                <field name="threshold_value"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_l10n_ch_salary_certificate_compliance_preset_form" model="ir.ui.view">
+        <field name="name">l10n.ch.salary.certificate.compliance.rule.preset.form</field>
+        <field name="model">l10n.ch.salary.certificate.compliance.rule.preset</field>
+        <field name="arch" type="xml">
+            <form string="Compliance Rule Preset">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="sequence"/>
+                            <field name="active"/>
+                            <field name="code"/>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="chapter"/>
+                            <field name="guidance_reference"/>
+                            <field name="rule_type"/>
+                            <field name="target_field_key"/>
+                            <field name="reference_field_key"/>
+                            <field name="threshold_value"/>
+                            <field name="expected_value"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_l10n_ch_salary_certificate_compliance_preset_search" model="ir.ui.view">
+        <field name="name">l10n.ch.salary.certificate.compliance.rule.preset.search</field>
+        <field name="model">l10n.ch.salary.certificate.compliance.rule.preset</field>
+        <field name="arch" type="xml">
+            <search string="Compliance Rule Presets">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="chapter"/>
+                <field name="rule_type"/>
+                <filter name="filter_chapter_i" string="Chapter I" domain="[('chapter', '=', 'chapter_i')]"/>
+                <filter name="filter_chapter_ii" string="Chapter II" domain="[('chapter', '=', 'chapter_ii')]"/>
+                <filter name="filter_active" string="Active" domain="[('active', '=', True)]"/>
+                <separator/>
+                <filter name="group_by_chapter" string="Chapter" context="{'group_by': 'chapter'}"/>
+                <filter name="group_by_rule_type" string="Rule Type" context="{'group_by': 'rule_type'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_l10n_ch_salary_certificate_compliance_preset" model="ir.actions.act_window">
+        <field name="name">Compliance Rule Presets</field>
+        <field name="res_model">l10n.ch.salary.certificate.compliance.rule.preset</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_l10n_ch_salary_certificate_compliance_preset_search"/>
+        <field name="context">{'search_default_filter_active': 1}</field>
+    </record>
+
+    <record id="view_l10n_ch_salary_certificate_audit_log_tree" model="ir.ui.view">
+        <field name="name">l10n.ch.salary.certificate.audit.log.tree</field>
+        <field name="model">l10n.ch.salary.certificate.audit.log</field>
+        <field name="arch" type="xml">
+            <list string="Salary Certificate Audit Log" default_order="event_at desc,id desc" create="false" delete="false" edit="false">
+                <field name="event_at"/>
+                <field name="action"/>
+                <field name="certificate_id_ref"/>
+                <field name="certificate_name"/>
+                <field name="employee_id"/>
+                <field name="year"/>
+                <field name="state_before"/>
+                <field name="details"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_l10n_ch_salary_certificate_audit_log_form" model="ir.ui.view">
+        <field name="name">l10n.ch.salary.certificate.audit.log.form</field>
+        <field name="model">l10n.ch.salary.certificate.audit.log</field>
+        <field name="arch" type="xml">
+            <form string="Salary Certificate Audit Log" create="false" edit="false" delete="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="event_at"/>
+                            <field name="action"/>
+                            <field name="certificate_model"/>
+                            <field name="certificate_id_ref"/>
+                            <field name="certificate_name"/>
+                        </group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="year"/>
+                            <field name="state_before"/>
+                        </group>
+                    </group>
+                    <group string="Details">
+                        <field name="details"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_l10n_ch_salary_certificate_audit_log_search" model="ir.ui.view">
+        <field name="name">l10n.ch.salary.certificate.audit.log.search</field>
+        <field name="model">l10n.ch.salary.certificate.audit.log</field>
+        <field name="arch" type="xml">
+            <search string="Salary Certificate Audit Log">
+                <field name="event_at"/>
+                <field name="action"/>
+                <field name="employee_id"/>
+                <field name="year"/>
+                <filter name="filter_archived" string="Archived" domain="[('action', '=', 'archived')]"/>
+                <filter name="filter_deleted" string="Deleted" domain="[('action', '=', 'deleted')]"/>
+                <separator/>
+                <filter name="group_by_action" string="Action" context="{'group_by': 'action'}"/>
+                <filter name="group_by_employee" string="Employee" context="{'group_by': 'employee_id'}"/>
+                <filter name="group_by_year" string="Year" context="{'group_by': 'year'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_l10n_ch_salary_certificate_audit_log" model="ir.actions.act_window">
+        <field name="name">Salary Certificate Audit Log</field>
+        <field name="res_model">l10n.ch.salary.certificate.audit.log</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_l10n_ch_salary_certificate_audit_log_search"/>
+    </record>
+
+    <menuitem
+        id="menu_l10n_ch_salary_certificate_pdf_field"
+        name="PDF Fields"
+        parent="menu_l10n_ch_salary_certificate_configuration"
+        action="action_l10n_ch_salary_certificate_pdf_field"
+        sequence="10"
+    />
+
+    <menuitem
+        id="menu_l10n_ch_salary_certificate_formula"
+        name="Formulas"
+        parent="menu_l10n_ch_salary_certificate_configuration"
+        action="action_l10n_ch_salary_certificate_formula"
+        sequence="15"
+    />
+
+    <menuitem
+        id="menu_l10n_ch_salary_certificate_compliance_rule"
+        name="Compliance Rules"
+        parent="menu_l10n_ch_salary_certificate_configuration"
+        action="action_l10n_ch_salary_certificate_compliance_rule"
+        sequence="25"
+    />
+
+    <menuitem
+        id="menu_l10n_ch_salary_certificate_compliance_preset"
+        name="Compliance Rule Presets"
+        parent="menu_l10n_ch_salary_certificate_configuration"
+        action="action_l10n_ch_salary_certificate_compliance_preset"
+        sequence="35"
+    />
+
+    <menuitem
+        id="menu_l10n_ch_salary_certificate_audit_log"
+        name="Audit Log"
+        parent="menu_l10n_ch_salary_certificate_configuration"
+        action="action_l10n_ch_salary_certificate_audit_log"
+        sequence="45"
+    />
+</odoo>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rule_l10n_ch_salary_certificate_draft_owner_only" model="ir.rule">
+        <field name="name">Salary Certificate Draft visible only for creator</field>
+        <field name="model_id" ref="model_l10n_ch_salary_certificate"/>
+        <field name="domain_force">['|', ('state', '!=', 'draft'), ('create_uid', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('payroll.group_payroll_user')), (4, ref('payroll.group_payroll_manager'))]"/>
+    </record>
+</odoo>
